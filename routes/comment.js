@@ -53,6 +53,7 @@ router.post("/comments/:articleId", async (req, res) => {
   });
   res.json({ Message: "작성 완료" });
 });
+
 //댓글 수정
 router.put("/comments/:commentId", async (req, res) => {
   const comId = req.params.commentId;

@@ -1,7 +1,8 @@
 const express = require("express");
-const connect = require("./schemas");
+const connect = require("./schemas/db_connection");
+const mongoose = require("mongoose");
 const app = express();
-const port = 5000;
+const port = 3000;
 
 connect();
 
