@@ -1,0 +1,106 @@
+https://typescript-kr.github.io/pages/jsdoc-reference.html
+
+
+- 회원 가입//
+     -Request
+        -Method: POST
+        -URL: /user
+        -Body:{ email:string, name:String, age:Number, phone:Number }
+    -Response
+        -Status code:201
+        -Payload: { token: string }
+- 로그인//
+    -Request
+        -Method: POST
+        -ULR: /login
+        -Body:{ email:string, password:string }
+    -Response
+        -Status code:201
+        -Payload: { token: string }
+- 회원 정보 수정//
+    -Request
+        -Method: PUT
+        -ULR: /user/:userId
+        -Body:{ email:string, name:String, age:Number, phone:Number }
+    -Response
+        -Status code:200
+        -Payload: { token: string }
+- 회원 탈퇴//
+    -Request
+        -Method: DELETE
+        -ULR: /user/:userId
+    -Response
+        -Status code:200
+        -Payload: { message: string }
+
+
+
+
+
+- 게시글 작성//
+    -Request
+        -Method:POST
+        -ULR: /articles
+        -Body:{ articleId:Number, name:String, title:String, contents:String, time:date }
+    -Response
+        -Status code:201
+        -Payload: { articleId:Number }
+- 게시글 목록 조회
+    -Request
+        -Method: GET
+        -ULR: /articles
+    -Response
+        -Status code:200
+        -Payload: {articleId:Number, userId:number, title:String, contents:String }[]
+- 게시글 상세 조회
+     -Request
+        -Method: GET
+        -ULR: /articles/:articlesId
+    -Response
+        -Status code:200
+        -Payload: {articleId:Number, userId:number, title:String, contents:String }
+- 게시글 수정
+     -Request
+        -Method: PUT
+        -ULR: /articles/:articlesId
+        -Body: { title:String, contents:String }
+    -Response
+        -Status code:200
+        -Payload: { message: String }
+- 게시글 삭제
+     -Request
+        -Method: DELETE
+        -ULR: /articles/:articlesId
+    -Response
+        -Status code:200
+        -Payload: { message:String }
+- 특정 게시글에 댓글 작성
+    -Request
+        -Method:POST
+        -ULR: /articles/:articlesId/comment
+        -Body:{articlesId:Number, userId:number, comment:String }
+    -Response
+        -Status code:201
+        -Payload: { commentId:Number,userId:number, comment:String }
+- 특정 게시글에 달린 댓글 목록 조회
+     -Request
+        -Method: GET
+        -ULR: /articles/:articlesId/comments
+    -Response
+        -Status code:200
+        -Payload: {commentId:Number, userId:number, comment:String }[]
+- 특정 게시글에 달린 댓글 수정
+     -Request
+        -Method: PUT
+        -ULR: /articles/:articlesId/comments/:commentId
+        -Body:{ comment:String }
+    -Response
+        -Status code:200
+        -Payload: { message:String }
+- 특정 게시글에 달린 댓글 삭제
+    -Request
+        -Method: DELETE
+        -ULR: /articles/:articlesId/comments/:commentId
+    -Response
+        -Status code:200
+        -Payload: {commentId:Number, userId:number, comment:String }
