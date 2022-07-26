@@ -61,7 +61,10 @@ router.post("/posts", async (req, res) => {
 //게시글 상세 조회
 router.get("/posts/:articleId", async (req, res) => {
   const postId = req.params.articleId;
-  const posts = await Post.find({ postid: postId });
+  const posts = await Post.find(
+    { postid: postId },
+    { _id: 0, title: 1, name: 1, time: 1, postid: 1 }
+  );
   if (!posts.length) {
     return res.json({
       success: false,
