@@ -35,8 +35,6 @@ https://typescript-kr.github.io/pages/jsdoc-reference.html
 
 
 
-
-
 - 게시글 작성//
     -Request
         -Method:POST

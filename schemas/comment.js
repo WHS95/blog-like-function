@@ -1,5 +1,7 @@
+//몽구스 모듈을 가져온다.
 const mongoose = require("mongoose");
 
+//new가 붙음으로써 함수가 아니라 Class로 인식
 const commentSchema = new mongoose.Schema({
   commentid: {
     type: String,
@@ -30,4 +32,5 @@ const commentSchema = new mongoose.Schema({
   },
 });
 
+//Comment라는 이름을 가지며,위 스키마를 가진 모듈을 생성하겠다.
 module.exports = mongoose.model("Comment", commentSchema);
