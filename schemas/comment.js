@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 //new가 붙음으로써 함수가 아니라 Class로 인식
 const commentSchema = new mongoose.Schema({
   commentid: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  name: {
+  nickname: {
     type: String,
     required: true,
     trim: true,
@@ -23,13 +23,9 @@ const commentSchema = new mongoose.Schema({
     unique: true,
   },
   postid: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-  },
-  password: {
-    type: Number,
-    required: true,
-  },
+  }
 });
 
 //Comment라는 이름을 가지며,위 스키마를 가진 모듈을 생성하겠다.

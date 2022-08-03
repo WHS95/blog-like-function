@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const { PORT, MONGODB_URL } = process.env;
 
-
 const connect = () => {
   mongoose
-    .connect(MONGODB_URL)
+    .connect("mongodb://localhost:27017/blog-update")
     //27017은 몽고 db의 기본 포트 넘버이다.
     .then(() => console.log("MongoDB conected"))
     .catch((err) => console.log(err));
