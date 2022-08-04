@@ -16,24 +16,24 @@ router.get("/post/like", authorization, async (req, res) => {
       errorMessage: "좋아요한 게시물이 없습니다.",
     });
   }
-  console.log(likedposts);
+  
   //like 데이터 베이스에서 로그인 유저 아이디가 좋아요한 postid를 출력
   const likedpostId = likedposts.map((table) => table.postId);
-  console.log(likedpostId); //2,5,6
+  console.log(likedpostId); 
 
   //post데이터 베이스 출력에서 postid 를 like 와 외부키로 연동시켜서 붙여넣기
   Post.hasMany(like, { foreignKey: "postId" });
   like.belongsTo(Post, { foreignKey: "postId" });
   const Posts = await Post.findAll({
+    where: { postid: likedpostId },
     include: [
       {
         model: like,
       },
     ],
-    where: { postid: likedpostId },
   });
-  res.json({
-    Post: Posts.map((post) => {
+
+  let likedPosts = Posts.map((post) => {
       return {
         postId: post.postId,
         userId: post.userId,
@@ -42,8 +42,12 @@ router.get("/post/like", authorization, async (req, res) => {
         contents: post.contents,
         likes: post.likes.length,
       };
-    }),
-  });
+    })
+  
+  //좋아요 높은순으로 정렬
+  res.json(likedPosts.sort(function(a, b) {
+      return b.likes- a.likes;
+    }))
 });
 
 //좋아요 기능 API ok
@@ -59,7 +63,7 @@ router.put("/posts/:postId/like", authorization, async (req, res) => {
   const checkliked = await like.findAll({
     where: { [Op.and]: [{ postId: postId }, { userId: userId }] },
   });
-  console.log(checkliked.length);
+
   if (!checkliked.length) {
     const liker = new like({ userId, postId });
     await liker.save();

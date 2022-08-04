@@ -6,7 +6,8 @@ const { Post } = require("../models");
 //전체 게시글 목록 조회 ok
 router.get("/posts", async (req, res) => {
   const Posts = await Post.findAll({
-    attributes: ["postId", "nickname", "contents", "title", "createdAt"],
+     order: [["createdAt", "DESC"]],
+    attributes: ["postId", "nickname", "contents", "title", "createdAt"]
   });
   if (!Posts.length) {
     return res.json({

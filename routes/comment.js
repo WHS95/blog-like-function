@@ -3,14 +3,16 @@ const router = express.Router();
 const authorization = require("../middlewares/auth-middlware");
 const { Comments } = require("../models");
 
-
 //댓글 목록 조회 API ok
 router.get("/comments/:postId", async (req, res) => {
   ///comments/:articleId위 url에서 articleId부분에 들어간 값을 PostId로 선언하겠다.
   const { postId } = req.params;
   //db 컬렉션인 Comment에 들어있는 데이터중에 Url에서 가져온 값과 데이터에 postid의 키값이 같을 경우에
   //찾아서Comments에 반영을 할 것이며 그 후
-  const Comment = await Comments.findAll({ where: { postId } });
+  const Comment = await Comments.findAll({
+    where: { postId },
+    order: [["createdAt", "DESC"]],
+  });
   //배열로 넘어오기에 만약 들어온 Conmments에 데이터가 없다면 0(false)을 출력할것이다.
   //그렇기에 !을 이용하여 없는 경우에 응답값을 만들어준다.
   if (!Comment.length) {
